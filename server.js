@@ -14,22 +14,22 @@ app.get("/", (req, res) => {
   res.send("app runded succesfully");
 });
 
+if (process.env.NODE_ENV == "devolpment") {
+  app.use(morgan("dev"));
+  console.log(`mode: ${process.env.NODE_ENV}`);
+}
+
 //get all blogs
 const BlogModal = require("./models/Blog");
-app.get("/blogs", async (req, res) => {
-  const page = req.query.page * 1 || 1;
-  const limit = req.query.limit * 1 || 6;
-  const skip = (page - 1) * limit;
-
+app.get("/article", async (req, res) => {
   const blog = await BlogModal.find()
     .sort({ $natural: -1 })
-    .skip(skip)
-    .limit(limit);
   res.status(201).json(blog);
 });
 
+
 //get blog by Id
-app.get("/blogs/:id", async (req, res) => {
+app.get("/article/:id", async (req, res) => {
   const { id } = req.params;
   const blog = await BlogModal.findById(id);
   res.status(201).json(blog);

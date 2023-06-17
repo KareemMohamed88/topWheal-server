@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 
 const blogSchema = mongoose.Schema({
+    id: Number,
     title:{
         type: String,
     },
@@ -30,6 +31,6 @@ const blogSchema = mongoose.Schema({
     },
 })
 
-const BlogModal = mongoose.model("blog", blogSchema);
+const BlogModal = mongoose.model("article", blogSchema);
 
 module.exports = BlogModal
