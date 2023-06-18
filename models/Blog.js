@@ -1,7 +1,6 @@
 const mongoose = require("mongoose")
 
 const blogSchema = mongoose.Schema({
-    id: Number,
     title:{
         type: String,
     },

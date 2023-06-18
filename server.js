@@ -22,11 +22,12 @@ if (process.env.NODE_ENV == "devolpment") {
 //get all blogs
 const BlogModal = require("./models/Blog");
 app.get("/article", async (req, res) => {
-  const blog = await BlogModal.find()
-    .sort({ $natural: -1 })
+  const page = req.query.page * 1 || 1;
+  const limit = req.query.limit *1 || 2
+  const skip = (page- 1) * limit;
+  const blog = await BlogModal.find().sort({ $natural: -1 }).skip(skip).limit(limit)
   res.status(201).json(blog);
 });
-
 
 //get blog by Id
 app.get("/article/:id", async (req, res) => {
