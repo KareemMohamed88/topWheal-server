@@ -23,9 +23,14 @@ if (process.env.NODE_ENV == "devolpment") {
 const BlogModal = require("./models/Blog");
 app.get("/article", async (req, res) => {
   const page = req.query.page * 1 || 1;
-  const limit = req.query.limit *1 || 2
-  const skip = (page- 1) * limit;
-  const blog = await BlogModal.find().sort({ $natural: -1 }).skip(skip).limit(limit)
+  const limit = req.query.limit * 1 || 2;
+  const skip = (page - 1) * limit;
+
+  const blog = await BlogModal.find()
+    .sort({ $natural: -1 })
+    .skip(skip)
+    .limit(limit);
+    
   res.status(201).json(blog);
 });
 
