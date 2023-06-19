@@ -10,6 +10,10 @@ const blogSchema = mongoose.Schema({
     secondImg:{
         type: String,
     },
+    summary:{
+        type: String,
+        maxLength: 120,
+    },
     p1:{
         type: String,
     },
