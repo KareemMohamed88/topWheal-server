@@ -20,30 +20,30 @@ if (process.env.NODE_ENV == "devolpment") {
 }
 
 //get all blogs
-const BlogModal = require("./models/Blog");
+const ArticleModal = require("./models/Articles");
 app.get("/article", async (req, res) => {
   const page = req.query.page * 1 || 1;
   const limit = req.query.limit * 1 || 6;
   const skip = (page - 1) * limit;
 
-  const blog = await BlogModal.find()
+  const article = await ArticleModal.find()
     .sort({ $natural: -1 })
     .skip(skip)
     .limit(limit);
     
-  res.status(201).json(blog);
+  res.status(201).json(article);
 });
 
 //get blog by Id
 app.get("/article/:id", async (req, res) => {
   const { id } = req.params;
-  const blog = await BlogModal.findById(id);
-  res.status(201).json(blog);
+  const article = await ArticleModal.findById(id);
+  res.status(201).json(article);
 });
 
 //create blog
 app.post("/createBlog", async (req, res) => {
-  const newBlog = new BlogModal(req.body);
+  const newBlog = new ArticleModal(req.body);
   await newBlog.save();
   res.status(201).json(req.body);
 });
